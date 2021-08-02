@@ -1,0 +1,45 @@
+<!doctype>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>LATV</title>
+    <!-- Load Vue followed by Vue Router -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css.css">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <img src="images\salle.jpg" class='img'>
+            <div class="navbar" id="scroll_header">
+                <a><img src="images\LT_partners_logo4.png" class="logo" class='img'></a>
+                <div class="header-left">
+                    <router-link to="/" exact>Accueil</router-link>
+                    <router-link to="/films">Films</router-link>
+                    <router-link to="/infos">Informations</router-link>
+                </div>
+                <div class="header-right">
+                    <router-link v-if="user.id" to="/myreservations">Mes Réservations</router-link>
+                    <router-link v-if="user.id == null" to="/login">Login</router-link>
+                    <router-link v-if="user.id == null" to="/register">Register</router-link>
+                    <router-link v-else to="/logout">Logout</router-link>
+                </div>
+            </div>
+        </header>
+        <main>
+            <router-view @cancel-Pay="cancelPay" @logout="logout" @add-movie="addMovie" @pick-admin="pickAdmin" @show-specific-movie="showSpecificMovie" @login-account="loginAccount" @register-account="registerAccount" :films="films" :user="user">
+            </router-view>
+        </main>
+
+    </div>
+</body>
+
+<script src="sticky-header.js"></script>
+<script src="/vue-application.js"></script>
+
+</html>
